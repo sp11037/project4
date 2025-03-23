@@ -1,7 +1,20 @@
-const Logout = () => {
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Logout = ({ uname, unameSetter }) => {
+    const navigate = useNavigate();
+
+    unameSetter(null);
+
+    useEffect(() => {
+        if (!uname) {
+            navigate('/login');
+        }
+    }, [uname, navigate]);
+
     return (
         <div>
-            <h1>Logout</h1>
+            <h1>Logged Out</h1>
         </div>
     );
 };
