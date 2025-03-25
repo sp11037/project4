@@ -27,4 +27,21 @@ router.get('/:uname', async (req, res) => {
     };
 });
 
+router.post('/', async (req, res) => {
+    try {
+        const {uname, pword} = req.body;
+        const data = await connection.promise().query(
+            `INSERT INTO users VALUES (?, ?);`, [uname, pword]
+        );
+
+        res.status(202).json({
+            user: data[0]
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: err
+        });
+    };
+});
+
 export default router;
