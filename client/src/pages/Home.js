@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryTab from './components/CategoryTab';
 import Modal from './components/Modal';
+import Question from './components/Question';
 
-const Home = ({ uname, categories, categoriesSetter }) => {
+const Home = ({ uname, categories, categoriesSetter, questions, questionsSetter }) => {
     const navigate = useNavigate();
     const [currCategory, currCategorySetter] = useState(1);     // active category
     const modalInputRef = useRef();
@@ -56,11 +57,21 @@ const Home = ({ uname, categories, categoriesSetter }) => {
         <CategoryTab key={category.categoryId} categoryId={category.categoryId} categoryName={category.categoryName} changeCategory={changeCategory} />
     );
 
-    // TODO: display questions for respoective category
+    // get questions by category
     useEffect(() => {
-        const contentArea = document.querySelector('.content');
-        contentArea.innerHTML = 'Content for ' + currCategory;
+        const url = 'http://localhost:5000/questions/' + currCategory;
+        const parameters = {
+            method: 'GET'
+        }
+        
+        fetch(url, parameters)
+            .then(res => res.json())
+            .then(json => questionsSetter(json.questions))
     }, [currCategory]);
+
+    // render questions
+    let questionList = questions.map(question => <Question key={question.questionId} questionId={question.questionId} questionText={question.question} />);
+
 
     return (
         <div>
@@ -69,7 +80,7 @@ const Home = ({ uname, categories, categoriesSetter }) => {
             {categoryList}
             <div onClick={() => handleModal('category')}>+</div>
             <Modal modalInputRef={modalInputRef} handleModal={handleModal} handleAdd={handleAdd} />
-            <div className='content'>content here</div>
+            <div>{questionList}</div>
         </div>
     );
 };

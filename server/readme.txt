@@ -27,4 +27,15 @@ create table `categories` (
 insert into `categories` values (1, 'Category 1');
 insert into `categories` values (2, 'Category 2');
 insert into `categories` values (3, 'Category 3');
+-- questions
+drop table `questions`;
+create table `questions` (
+	`questionId` int primary key,
+    `question` varchar(50),
+    `categoryId` int,
+    foreign key (categoryId) references categories(categoryId)
+);
+insert into `questions` values (1, 'Question 1', 1);
+insert into `questions` values (2, 'Question 2', 2);
+insert into `questions` values (3, 'Question 3', 3);
 commit;

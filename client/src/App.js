@@ -11,6 +11,7 @@ import './App.css';
 function App() {
   const [uname, unameSetter] = useState(null);
   const [categories, categoriesSetter] = useState([]);
+  const [questions, questionsSetter] = useState([]);
 
   useEffect(() => {
     const url = 'http://localhost:5000/categories';
@@ -26,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home uname={uname} categories={categories} categoriesSetter={categoriesSetter} />} />
+          <Route index element={<Home uname={uname} categories={categories} categoriesSetter={categoriesSetter} questions={questions} questionsSetter={questionsSetter} />} />
           <Route path='login' element={<Login uname={uname} unameSetter={unameSetter} />} />
           <Route path='register' element={<Register />} />
           <Route path='logout' element={<Logout uname={uname} unameSetter={unameSetter} />} />
