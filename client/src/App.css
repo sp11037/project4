@@ -5,3 +5,17 @@
 .redText {
   color: red;
 }
+
+.categoryBtn {
+  height: 50px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.categoryBtn:hover {
+  background-color: lightgray;
+}
+
+.categoryBtn:active {
+  background-color: lightblue;
+}
