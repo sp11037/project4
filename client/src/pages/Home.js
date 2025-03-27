@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoryTab from './components/CategoryTab';
+import Modal from './components/Modal';
 
 const Home = ({ uname, categories, categoriesSetter }) => {
     const navigate = useNavigate();
-    const [currCategory, currCategorySetter] = useState(1);
+    const [currCategory, currCategorySetter] = useState(1);     // active category
+    const modalInputRef = useRef();
 
     // redirect if user isn't logged in
     useEffect(() => {
@@ -15,12 +17,24 @@ const Home = ({ uname, categories, categoriesSetter }) => {
 
     // change categories
     const changeCategory = (event) => {
-        const tab = event.target.getAttribute('tabId');
+        const tab = event.target.getAttribute('tab-id');
         currCategorySetter(tab);
     };
 
+    // open and close modal window
+    const handleModal = (content) => {
+        const overlay = document.querySelector('.overlay');
+        const modalBox = document.querySelector('.modalBox');
+        const modalText = document.querySelector('.modalText');
+        overlay.classList.toggle('hidden');
+        modalBox.classList.toggle('hidden');
+        modalText.innerHTML = 'Add new ' + content;
+        modalInputRef.current.value = '';
+    }
+
     // add new category
     const handleAdd = () => {
+        const modalInput = modalInputRef.current.value;
         const newId = categories.length + 1;
         const url = 'http://localhost:5000/categories';
         const parameters = {
@@ -29,15 +43,17 @@ const Home = ({ uname, categories, categoriesSetter }) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({categoryId: newId, categoryName: 'Category ' + newId})
+            body: JSON.stringify({categoryId: newId, categoryName: modalInput})
         }
         fetch(url, parameters);
-        categoriesSetter([...categories, {categoryId: newId, categoryName: 'Category ' + newId}]);
+        categoriesSetter([...categories, {categoryId: newId, categoryName: modalInput}]);
+        modalInputRef.current.value = '';
+        handleModal();
     }
 
     // render category menu
     let categoryList = categories.map(category => 
-        <CategoryTab categoryId={category.categoryId} categoryName={category.categoryName} changeTab={changeCategory} />
+        <CategoryTab key={category.categoryId} categoryId={category.categoryId} categoryName={category.categoryName} changeCategory={changeCategory} />
     );
 
     // TODO: display questions for respoective category
@@ -51,7 +67,8 @@ const Home = ({ uname, categories, categoriesSetter }) => {
             <h1>Home</h1>
             <h3>Login Successful {uname}</h3>
             {categoryList}
-            <div onClick={handleAdd}>+</div>
+            <div onClick={() => handleModal('category')}>+</div>
+            <Modal modalInputRef={modalInputRef} handleModal={handleModal} handleAdd={handleAdd} />
             <div className='content'>content here</div>
         </div>
     );

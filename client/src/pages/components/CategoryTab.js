@@ -1,6 +1,6 @@
-const CategoryTab = ({ categoryId, categoryName, changeTab }) => {
+const CategoryTab = ({ categoryId, categoryName, changeCategory }) => {
     return (
-        <div className='categoryBtn' tabId={categoryId} onClick={changeTab}>{categoryName}</div>
+        <div className='categoryBtn' tab-id={categoryId} onClick={changeCategory}>{categoryName}</div>
     )
 };
 
