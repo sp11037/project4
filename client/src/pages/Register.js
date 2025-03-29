@@ -1,12 +1,19 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ uname }) => {
     const unameRef = useRef();
     const pwordRef = useRef();
     const repeatPwordRef = useRef();
     const tosRef = useRef();
     const navigate = useNavigate();
+
+    // redirect if user is logged in
+    useEffect(() => {
+        if (uname) {
+            navigate('/');
+        }
+    }, [uname, navigate])
 
     const handleRegister = () => {
         // input data
@@ -16,7 +23,7 @@ const Register = () => {
         const repeatPword = repeatPwordRef.current.value;
         const tos = tosRef.current.checked;
 
-        // error messages
+        // error fields
         const unameError = document.querySelector('#unameError');
         const pwordError = document.querySelector('#pwordError');
         const repeatPwordError = document.querySelector('#repeatPwordError');
@@ -108,9 +115,7 @@ const Register = () => {
                 <input type='checkbox' ref={tosRef} />
                 I agree to the Terms and Conditions and Privacy Policy
             </div>
-            <div>
-                <button onClick={handleRegister}>Register</button>
-            </div>
+            <button onClick={handleRegister}>Register</button>
         </div>
     );
 };

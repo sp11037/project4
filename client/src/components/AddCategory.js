@@ -10,12 +10,9 @@ const AddCategory = ({ categoryRef, categories, categoriesSetter }) => {
     };
 
     const addCategory = () => {
-        const newId = categories.length + 1;
-        const newCategory = categoryRef.current.value;
-        const input = {
-            categoryId: newId,
-            categoryName: newCategory
-        }
+        const input = {};
+        input.categoryId = categories.length + 1;
+        input.categoryName = categoryRef.current.value;
 
         const url = 'http://localhost:5000/categories';
         const parameters = {

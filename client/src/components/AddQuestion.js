@@ -10,11 +10,9 @@ const AddQuestion = ({ questionRef, questions, questionsSetter, currCategory }) 
     };
 
     const addQuestion = () => {
-        const newQuestion = questionRef.current.value;
-        const input = {
-            question: newQuestion,
-            categoryId: currCategory
-        };
+        const input = {};
+        input.question = questionRef.current.value;
+        input.categoryId = currCategory;
 
         const url = 'http://localhost:5000/questions';
         const parameters = {

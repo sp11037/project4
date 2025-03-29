@@ -7,6 +7,13 @@ const Login = ({ uname, unameSetter }) => {
     const [errorMsg, errorMsgSetter] = useState('');
     const navigate = useNavigate();
 
+    // redirect if user is logged in
+    useEffect(() => {
+        if (uname) {
+            navigate('/');
+        }
+    }, [uname, navigate]);
+
     const handleLogin = () => {
         let user = {};
         user.uname = unameRef.current.value;
@@ -25,17 +32,12 @@ const Login = ({ uname, unameSetter }) => {
                 if (u.length === 0 || u[0].pword !== user.pword) {
                     errorMsgSetter('invalid username or password');
                 } else {
+                    localStorage.setItem('uname', user.uname)
                     unameSetter(user.uname);
                     errorMsgSetter('');
                 }
             });
     };
-
-    useEffect(() => {
-        if (uname) {
-            navigate('/');
-        }
-    }, [uname, navigate]);
 
     return (
         <div>

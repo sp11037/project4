@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CategoryTab from './components/CategoryTab';
-import AddCategory from './components/AddCategory';
-import Question from './components/Question';
-import AddQuestion from './components/AddQuestion';
+import CategoryTab from '../components/CategoryTab';
+import AddCategory from '../components/AddCategory';
+import Question from '../components/Question';
+import AddQuestion from '../components/AddQuestion';
 
 const Home = ({ uname, categories, categoriesSetter, questions, questionsSetter }) => {
     const navigate = useNavigate();
@@ -42,7 +42,9 @@ const Home = ({ uname, categories, categoriesSetter, questions, questionsSetter 
     }, [currCategory]);
 
     // render questions
-    let questionList = questions.map(question => <Question key={`q${question.questionId}`} questionText={question.question} />);
+    let questionList = questions.map(question => 
+        <Question key={`q${question.questionId}`} questionText={question.question} />
+    );
 
     return (
         <div>
