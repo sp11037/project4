@@ -13,11 +13,28 @@ router.get('/:category', async (req, res) => {
     try {
         const {category} = req.params;
         const data = await connection.promise().query(
-            `SELECT questionId, question from questions as q inner join categories as c where q.categoryId = c.categoryId and q.categoryId = ?;`, [category]
+            `SELECT questionId, question FROM questions AS q INNER JOIN categories AS c WHERE q.categoryId = c.categoryId AND q.categoryId = ?;`, [category]
         );
 
         res.status(202).json({
             questions: data[0]
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: err
+        });
+    };
+});
+
+router.post('/', async (req, res) => {
+    try {
+        const {question, categoryId} = req.body;
+        const data = await connection.promise().query(
+            `INSERT INTO questions (question, categoryID) VALUES (?, ?);`, [question, categoryId]
+        );
+
+        res.status(202).json({
+            question: data[0]
         });
     } catch (err) {
         res.status(500).json({

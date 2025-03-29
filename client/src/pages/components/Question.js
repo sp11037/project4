@@ -1,4 +1,4 @@
-const Question = ({ questionId, questionText }) => {
+const Question = ({ questionText }) => {
     return (
         <div>{questionText}</div>
     )

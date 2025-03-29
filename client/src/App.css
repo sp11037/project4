@@ -20,14 +20,14 @@
   background-color: lightblue;
 }
 
-.overlay {
+.categoryOverlay, .questionOverlay {
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
 }
 
-.modalBox {
+.categoryModalBox, .questionModalBox {
   position: absolute;
   background-color: lightcoral;
   width: 500px;
