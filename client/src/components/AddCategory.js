@@ -31,13 +31,13 @@ const AddCategory = ({ categoryRef, categories, categoriesSetter }) => {
 
     return (
         <>
-            <div onClick={handleModal}>+</div>
+            <div id='addCategoryBtn' onClick={handleModal}>+</div>
             <div className='categoryOverlay hidden' onClick={handleModal}></div>
             <div className='categoryModalBox hidden'>
-                <div onClick={handleModal}>X</div>
-                <div>Add new category</div>
-                <input type='text' ref={categoryRef} />
-                <button onClick={addCategory}>+</button>
+                <div className='closeModalBtn' onClick={handleModal}>&#9932;</div>
+                <div className='modalText'>Add new category</div>
+                <textarea className='modalInput' type='text' ref={categoryRef} />
+                <button className='modalAddBtn' onClick={addCategory}>+</button>
             </div>
         </>
     );

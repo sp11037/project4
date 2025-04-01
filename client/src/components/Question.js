@@ -1,6 +1,6 @@
 const Question = ({ questionText }) => {
     return (
-        <div>{questionText}</div>
+        <div className='question'>{questionText}</div>
     )
 }
 

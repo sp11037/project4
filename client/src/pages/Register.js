@@ -66,9 +66,9 @@ const Register = ({ uname }) => {
 
                 // check that the tos is accepted
                 if (tos) {
-                    tosContainer.classList.remove('redText');
+                    tosContainer.classList.remove('errorMsg');
                 } else {
-                    tosContainer.classList.add('redText');
+                    tosContainer.classList.add('errorMsg');
                     errorCount++;
                 }
 
@@ -94,28 +94,29 @@ const Register = ({ uname }) => {
     };
 
     return (
-        <div>
-            <h1>Register</h1>
-            <div>
-                Username 
-                <input type='text' ref={unameRef} />
-                <span id='unameError' className='hidden'>Username already exists / Invalid Username</span>
+        <div className='accountPage'>
+            <div className='accountBox'>
+                <h2>Register</h2>
+                <div className='formArea'>
+                    <div>
+                        <input type='text' ref={unameRef} autocomplete='off' placeholder='Username' />
+                        <span id='unameError' className='errorMsg hidden'>Username already exists / Invalid Username</span>
+                    </div>
+                    <div>
+                        <input type='password' ref={pwordRef} autocomplete='off' placeholder='Password' />
+                        <span id='pwordError' className='errorMsg hidden'>Invalid password. Enter a password that is at least 8 characters long and contains a number.</span>
+                    </div>
+                    <div>
+                        <input type='password' ref={repeatPwordRef} autocomplete='off' placeholder='Repeat Password' />
+                        <span id='repeatPwordError' className='errorMsg hidden'>The two passwords do not match.</span>
+                    </div>
+                    <div id='tosContainer'>
+                        <input type='checkbox' ref={tosRef} />
+                        &nbsp;&nbsp;I agree to the Terms and Conditions and Privacy Policy
+                    </div>
+                </div>
+                <div className='formBtn'><button onClick={handleRegister}>Register</button></div>
             </div>
-            <div>
-                Password 
-                <input type='text' ref={pwordRef} />
-                <span id='pwordError' className='hidden'>Invalid password. Enter a password that is at least 8 characters long and contains a number.</span>
-            </div>
-            <div>
-                Repeat Password 
-                <input type='text' ref={repeatPwordRef} />
-                <span id='repeatPwordError' className='hidden'>The two passwords do not match.</span>
-            </div>
-            <div id='tosContainer'>
-                <input type='checkbox' ref={tosRef} />
-                I agree to the Terms and Conditions and Privacy Policy
-            </div>
-            <button onClick={handleRegister}>Register</button>
         </div>
     );
 };

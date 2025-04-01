@@ -1,38 +1,281 @@
-.hidden {
-  display: none;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.redText {
-  color: red;
+html, body, #root {
+  height: 100%;
 }
 
-.categoryBtn {
-  height: 50px;
-  width: 300px;
-  border: 1px solid black;
+/* header area */
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100px;
+  background-image: radial-gradient(circle at 50% 130%, lightblue, #6494edc6);
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif ;
+  color: midnightblue;
 }
 
-.categoryBtn:hover {
-  background-color: lightgray;
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 2;
+
+  font-size: 5vh;
+  text-shadow: 2px 0 white,
+               -2px 0 white,
+               0 2px white,
+               0 -2px white,
+               1px 1px white,
+               1px -1px white,
+               -1px 1px white,
+               -1px -1px white,
+               5px 0 cornflowerblue,
+               -5px 0 cornflowerblue,
+               0 5px cornflowerblue,
+               0 -5px cornflowerblue,
+               3px 3px cornflowerblue,
+               3px -3px cornflowerblue,
+               -3px 3px cornflowerblue,
+               -3px -3px cornflowerblue;
 }
 
-.categoryBtn:active {
-  background-color: lightblue;
+nav {
+  grid-column: 3;
 }
+
+ul {
+  display: flex;
+  float: right;
+  margin: 5px;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  margin: 0 10px;
+  color: midnightblue;
+}
+
+/* main */
+
+main {
+  display: flex;
+  min-height: calc(100vh - 100px);
+  max-height: fit-content;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* category menu */
+
+aside {
+  width: 25%;
+  background: linear-gradient(#db7093, #ffe4e180), 
+              url(./img/ps-neutral.png) 0 0/40px;
+}
+
+.categoryBtn, #addCategoryBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  height: 100px;
+  width: 100%;
+
+  border: 1px solid palevioletred;
+  background: linear-gradient(mintcream, mistyrose);
+  box-shadow: inset white 0 7px 8px -3px,
+              inset #db7093ab 0 0 9px;
+
+  color: mediumvioletred;
+  font-size: 3vh;
+  text-shadow: 2px 0 mistyrose,
+               -2px 0 mistyrose,
+               0 2px mistyrose,
+               0 -2px mistyrose;
+}
+
+.categoryBtn:hover, #addCategoryBtn:hover {
+  border: 1px solid white;
+  background: linear-gradient(mistyrose, mintcream);
+  box-shadow: inset #db7093ab 0 7px 8px -3px,
+              inset white 0 0 9px;
+
+  color: mediumvioletred;
+}
+
+.categoryBtn:active, #addCategoryBtn:active, .current, .categoryBtn:active:hover, #addCategoryBtn:active:hover, .current:hover {
+  border: 1px solid palevioletred;
+  background: linear-gradient(lightpink, palevioletred);
+  box-shadow: inset white 0 7px 8px -3px,
+              inset #db7093ab 0 0 9px;
+
+  color: white;
+  text-shadow: 2px 0 palevioletred,
+               -2px 0 palevioletred,
+               0 2px palevioletred,
+               0 -2px palevioletred;
+}
+
+/* question area */
+
+section, .accountPage {
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+
+  border: 5px ridge white;
+  background: linear-gradient(papayawhip, seashell);
+
+  font-size: 2.5vh;
+  color: saddlebrown;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+/* modal */
 
 .categoryOverlay, .questionOverlay {
   position: absolute;
+  top: 0;
+  left: 0;
+
   height: 100%;
   width: 100%;
-  top: 0;
+
+  background-color: pink;
+  opacity: 40%;
 }
 
 .categoryModalBox, .questionModalBox {
   position: absolute;
-  background-color: lightcoral;
-  width: 500px;
-  height: 500px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  padding: 10px;
+  width: 400px;
+  height: 400px;
+
+  background-color: mistyrose;
+  border: 2px solid pink;
+  outline: 2px solid pink;
+  outline-offset: 1px;
+  box-shadow: white 0 0 0px 5px,
+              hotpink 0 0 25px,
+              inset white 0 7px 8px -3px,
+              inset palevioletred 0 0 9px;
+  border-radius: 20px;
+
+  color: mediumvioletred;
+  font-size: 3vh;
+}
+
+.closeModalBtn {
+  float: right;
+  margin-right: 10px;
+}
+
+.modalText {
+  margin-left: 10px;
+}
+
+.modalInput {
+  display: block;
+  margin: 20px auto 0px auto;
+  padding: 10px;
+  width: 80%;
+  height: 250px;
+
+  border: 1px solid palevioletred;
+  outline: none;
+
+  font-size: 2vh;
+  color: palevioletred;
+}
+
+.modalAddBtn {
+  display: block;
+  margin: 20px auto;
+  width: 40%;
+
+  border: 1px solid palevioletred;
+  border-radius: 10px;
+  background: linear-gradient(lightpink 40%, palevioletred);
+
+  font-size: 3vh;
+  color: white;
+  text-shadow: 0px 3px palevioletred;
+}
+
+/* error messages */
+
+.hidden {
+  display: none;
+}
+
+.errorMsg {
+  margin-top: 5px;
+  color: red;
+}
+
+span.errorMsg {
+  margin-left: 5px;
+}
+
+/* login/register page */
+
+.accountBox {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid saddlebrown;
+  outline: 1px solid saddlebrown;
+  outline-offset: 5px;
+  height: fit-content;
+  padding: 50px;
+}
+
+.formArea {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.formArea input {
+  height: 2.5vh;
+  width: 200px;
+  font-size: 2vh;
+  margin: 10px 0;
+  padding: 0 5px;
+  border: 1px solid saddlebrown;
+  outline: none;
+  color: saddlebrown;
+}
+
+#tosContainer {
+  margin-top: 5px;
+}
+
+#tosContainer input {
+  height: 20px;
+  width: 20px;
+}
+
+.formBtn button {
+  width: 300px;
+  height: 4vh;
+  border: 1px solid saddlebrown;
+  border-radius: 10px;
+  background: linear-gradient(#8b451380, saddlebrown);
+
+  font-size: 3vh;
+  color: white;
+  text-shadow: 0px 3px saddlebrown;
 }

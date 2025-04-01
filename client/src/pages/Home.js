@@ -20,6 +20,11 @@ const Home = ({ uname, categories, categoriesSetter, questions, questionsSetter 
 
     // change categories
     const changeCategory = (event) => {
+        document.querySelectorAll('.categoryBtn').forEach(btn => {
+            btn.classList.remove('current');
+        })
+        event.target.classList.toggle('current');
+
         const tab = event.target.getAttribute('tab-id');
         currCategorySetter(tab);
     };
@@ -47,14 +52,16 @@ const Home = ({ uname, categories, categoriesSetter, questions, questionsSetter 
     );
 
     return (
-        <div>
-            <h1>Home</h1>
-            <h3>Login Successful {uname}</h3>
-            <div>{categoryList}</div>
-            <AddCategory categoryRef={categoryRef} categories={categories} categoriesSetter={categoriesSetter} />
-            <div>{questionList}</div>
-            <AddQuestion questionRef={questionRef} questions={questions} questionsSetter={questionsSetter} currCategory={currCategory} />
-        </div>
+        <main>
+            <aside>
+                <div>{categoryList}</div>
+                <AddCategory categoryRef={categoryRef} categories={categories} categoriesSetter={categoriesSetter} />
+            </aside>
+            <section>
+                <div>{questionList}</div>
+                <AddQuestion questionRef={questionRef} questions={questions} questionsSetter={questionsSetter} currCategory={currCategory} />
+            </section>
+        </main>
     );
 };
 

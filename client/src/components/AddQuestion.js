@@ -34,10 +34,10 @@ const AddQuestion = ({ questionRef, questions, questionsSetter, currCategory }) 
             <div onClick={handleModal}>+</div>
             <div className='questionOverlay hidden' onClick={handleModal}></div>
             <div className='questionModalBox hidden'>
-                <div onClick={handleModal}>X</div>
-                <div>Add new question</div>
-                <input type='text' ref={questionRef} />
-                <button onClick={addQuestion}>+</button>
+                <div className='closeModalBtn' onClick={handleModal}>&#9932;</div>
+                <div className='modalText'>Add new question</div>
+                <textarea className='modalInput' type='text' ref={questionRef} />
+                <button className='modalAddBtn' onClick={addQuestion}>+</button>
             </div>
         </>
     );
